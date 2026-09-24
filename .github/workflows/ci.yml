@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Xcode project
+        run: |
+          brew install xcodegen
+          xcodegen generate
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Pick an iPhone simulator
+        run: |
+          id=$(xcrun simctl list devices available --json | python3 -c '
+          import json, sys
+          devices = json.load(sys.stdin)["devices"]
+          phones = [(runtime, d) for runtime, ds in devices.items() if "iOS" in runtime for d in ds if d["name"].startswith("iPhone")]
+          runtime, device = sorted(phones, key=lambda p: p[0])[-1]
+          print(device["udid"])
+          print(device["name"], runtime, file=sys.stderr)
+          ')
+          echo "SIMULATOR=$id" >> "$GITHUB_ENV"
+
+      - name: Build and test
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project MobileGrammar.xcodeproj \
+            -scheme MobileGrammar \
+            -destination "id=$SIMULATOR" \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee xcodebuild.log | grep -E "error:|warning: .*\.swift|Test Case .*(passed|failed)|Executed|\*\* (TEST|BUILD)" || true
+          test "${PIPESTATUS[0]}" -eq 0
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            TestResults.xcresult
+            xcodebuild.log

@@ -1,0 +1,46 @@
+/* Ukrainian interface. Keys are the English texts of the app. */
+
+"Lessons" = "Уроки";
+"Categories" = "Категорії";
+"Your groups" = "Ваші добірки";
+"About" = "Про програму";
+"About program" = "Про програму";
+"All lessons" = "Усі уроки";
+"Enter article name …" = "Який урок знайти ?";
+"Oops! No such lessons." = "Схоже, що такого уроку немає. Спробуйте увести щось інше.";
+"The lesson couldn't be opened." = "Не вдалося відкрити урок.";
+"Go to" = "Перейти до";
+
+"Setup reminder" = "Встановити нагадування";
+"Time" = "Час";
+"Remind me" = "Нагадати";
+"Cancel" = "Скасувати";
+"OK" = "Так";
+"Notifications are turned off for Mobile Grammar. You can allow them in Settings." = "Сповіщення для «Мобільної граматики» вимкнено. Їх можна дозволити в Параметрах.";
+"There are the lesson to study the \"Mobile grammar\"" = "Є урок для вивчення в \"Мобільній граматиці\"";
+"There are the group of lessons to study the \"Mobile grammar\"" = "Є добірка уроків для вивчення в \"Мобільній граматиці\"";
+
+"%lld lessons" = "Уроків: %lld";
+"Yet there is not one group. But you can create new one by clicking on button Add on toolbar." = "Поки що тут немає жодної добірки. Але ви можете створити нову, натиснувши кнопку на панелі інструментів.";
+"Create new list of lessons" = "Створити власну добірку уроків";
+"New group" = "Нова добірка";
+"Edit group" = "Редагувати добірку";
+"Remove group" = "Видалити добірку";
+"Remove all groups" = "Видалити всі добірки";
+"More" = "Ще";
+"Removing this group" = "Видалення добірки";
+"Removing your groups" = "Видалення добірок уроків";
+"This action will remove selected group. Sure to continue ?" = "Це видалить вибрану добірку. Точно продовжувати ?";
+"This action will remove all your groups. Sure to continue ?" = "Це видалить створені вами добірки уроків. Точно продовжувати ?";
+"It seems that there is no such group." = "Схоже, що такої добірки немає.";
+
+"Enter name of group …" = "Уведіть назву цієї добірки";
+"Please, name this group somehow …" = "Новій добірці уроків потрібно дати якусь назву …";
+"Sorry, it's too long group name. Please, keep within 50 characters" = "Вибачте, це занадто довге ім'я для групи. Будь ласка, вкладіться в 50 символів.";
+"Check lessons which you want to add to the new group" = "Позначте уроки, які треба додати в добірку.";
+"Selected: %lld" = "Вибрано: %lld";
+"Save group" = "Зберегти добірку";
+"Update group" = "Оновити добірку";
+"Couldn't save the group." = "Не вдалося зберегти добірку.";
+
+"This is the iPhone version of the Mobile Grammar app. It works offline. Your groups are stored only on this device. The app doesn't collect any statistics." = "Це версія «Мобільної граматики» для iPhone. Вона працює без інтернету. Ваші добірки зберігаються лише на цьому пристрої. Застосунок не збирає жодної статистики.";

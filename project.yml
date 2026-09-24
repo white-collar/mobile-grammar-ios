@@ -1,0 +1,66 @@
+# Xcode project definition for XcodeGen (https://github.com/yonaskolb/XcodeGen):
+#   brew install xcodegen && xcodegen generate
+name: MobileGrammar
+options:
+  bundleIdPrefix: org.mobile.grammar
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: en
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+targets:
+  MobileGrammar:
+    type: application
+    platform: iOS
+    sources:
+      - path: MobileGrammar
+        excludes:
+          - Resources/Content
+      # lessons keep their folder structure in the app bundle: Content/lessons/<id>.html
+      - path: MobileGrammar/Resources/Content
+        type: folder
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: org.mobile.grammar.ios
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Mobile Grammar
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
+        TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_STYLE: Automatic
+  MobileGrammarTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [MobileGrammarTests]
+    dependencies:
+      - target: MobileGrammar
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+  MobileGrammarUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [MobileGrammarUITests]
+    dependencies:
+      - target: MobileGrammar
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  MobileGrammar:
+    build:
+      targets:
+        MobileGrammar: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - MobileGrammarTests
+        - MobileGrammarUITests
