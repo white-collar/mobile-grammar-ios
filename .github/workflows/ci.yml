@@ -10,7 +10,7 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Generate Xcode project
         run: |
@@ -34,15 +34,17 @@ jobs:
 
       - name: Build and test
         run: |
-          set -o pipefail
+          status=0
           xcodebuild test \
             -project MobileGrammar.xcodeproj \
             -scheme MobileGrammar \
             -destination "id=$SIMULATOR" \
             -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO \
-            | tee xcodebuild.log | grep -E "error:|warning: .*\.swift|Test Case .*(passed|failed)|Executed|\*\* (TEST|BUILD)" || true
-          test "${PIPESTATUS[0]}" -eq 0
+            > xcodebuild.log 2>&1 || status=$?
+          grep -E "error:|warning: .*\.swift|Test Case .*(passed|failed)|Executed|\*\* (TEST|BUILD)" xcodebuild.log || true
+          # the job fails whenever xcodebuild fails (a failing test included)
+          exit $status
 
       - name: Upload test results
         if: failure()

@@ -155,6 +155,13 @@ struct GroupEditView: View {
                     }
                 }
                 Section {
+                    // a field in the form, not .searchable: an active search bar hides the Save button
+                    HStack {
+                        Image(systemName: "magnifyingglass").foregroundStyle(.secondary)
+                        TextField("Enter article name …", text: $query)
+                            .autocorrectionDisabled()
+                            .accessibilityIdentifier("lessonFilter")
+                    }
                     ForEach(Library.search(library.lessons, for: query)) { lesson in
                         Button {
                             toggle(lesson.id)
@@ -178,7 +185,6 @@ struct GroupEditView: View {
                     .textCase(nil)
                 }
             }
-            .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Enter article name …"))
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

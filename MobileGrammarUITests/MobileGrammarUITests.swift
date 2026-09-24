@@ -46,9 +46,9 @@ final class MobileGrammarUITests: XCTestCase {
         app.buttons["Save group"].tap()
         XCTAssertTrue(app.navigationBars["New group"].exists)
 
-        let search = app.searchFields.firstMatch
-        search.tap()
-        search.typeText("past simple")
+        let filter = app.textFields["lessonFilter"]
+        filter.tap()
+        filter.typeText("past simple")
         let lesson = app.buttons["Unit 11 - Past simple (I did)"]
         XCTAssertTrue(lesson.waitForExistence(timeout: 5))
         lesson.tap()
